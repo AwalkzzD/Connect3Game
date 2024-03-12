@@ -1,4 +1,4 @@
-package com.example.connect3game;
+package com.example.connect3game.home;
 
 import androidx.lifecycle.ViewModel;
 

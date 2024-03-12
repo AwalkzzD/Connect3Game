@@ -1,4 +1,4 @@
-package com.example.connect3game;
+package com.example.connect3game.home.welcome;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.example.connect3game.home.game.GameFragment;
+import com.example.connect3game.R;
 
 public class WelcomeFragment extends Fragment {
 

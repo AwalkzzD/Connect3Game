@@ -1,4 +1,4 @@
-package com.example.connect3game;
+package com.example.connect3game.home.game;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+
+import com.example.connect3game.R;
 
 public class GameFragment extends Fragment {
 
@@ -32,8 +34,22 @@ public class GameFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button a1 = view.findViewById(R.id.a1);
-        a1.setText("X");
+        Button quitGame = view.findViewById(R.id.quit_game_button);
+        Button playAgain = view.findViewById(R.id.play_again_button);
+
+        quitGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // back to welcome page
+            }
+        });
+
+        playAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // reset game board
+            }
+        });
 
     }
 }
