@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Connect 3 Game</string>
+    <string name="welcome_text">Welcome to Connect 3 Game</string>
+    <string name="player_one_name_hint">Please Enter your Name Player 1 (X)</string>
+    <string name="player_two_name_hint">Please Enter your Name Player 2 (O)</string>
+    <string name="play_button_text">Play Game</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="play_again_text">Play Again</string>
+    <string name="quite_game_text">Quite Game</string>
+</resources>
