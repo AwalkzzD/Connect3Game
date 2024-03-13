@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".home.game.GameFragment">
+    tools:context=".views.home.game.GameFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/custom_toolbar"

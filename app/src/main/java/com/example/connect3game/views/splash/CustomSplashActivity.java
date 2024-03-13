@@ -1,4 +1,4 @@
-package com.example.connect3game.splash;
+package com.example.connect3game.views.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.os.Handler;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.connect3game.home.GameActivity;
+import com.example.connect3game.views.home.GameActivity;
 import com.example.connect3game.R;
 
 public class CustomSplashActivity extends AppCompatActivity {

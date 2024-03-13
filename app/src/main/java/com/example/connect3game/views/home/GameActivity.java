@@ -1,4 +1,4 @@
-package com.example.connect3game.home;
+package com.example.connect3game.views.home;
 
 import android.os.Bundle;
 
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.connect3game.R;
-import com.example.connect3game.home.welcome.WelcomeFragment;
+import com.example.connect3game.views.home.welcome.WelcomeFragment;
 
 public class GameActivity extends AppCompatActivity {
 

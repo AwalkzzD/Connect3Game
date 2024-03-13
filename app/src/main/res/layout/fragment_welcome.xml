@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".home.welcome.WelcomeFragment">
+    tools:context=".views.home.welcome.WelcomeFragment">
 
     <TextView
         android:layout_width="wrap_content"

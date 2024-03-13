@@ -1,4 +1,4 @@
-package com.example.connect3game.home.welcome;
+package com.example.connect3game.views.home.welcome;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,11 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.example.connect3game.home.game.GameFragment;
 import com.example.connect3game.R;
+import com.example.connect3game.viewmodels.GameViewModel;
+import com.example.connect3game.views.home.game.GameFragment;
 
 public class WelcomeFragment extends Fragment {
+
+    private GameViewModel gameViewModel;
 
     private FragmentManager fragmentManager;
 
@@ -33,6 +37,8 @@ public class WelcomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        initViewModel();
+
         fragmentManager = requireActivity().getSupportFragmentManager();
 
         EditText playerOneET = view.findViewById(R.id.player_one_name);
@@ -44,11 +50,18 @@ public class WelcomeFragment extends Fragment {
             playerOneName = playerOneET.getText().toString();
             playerTwoName = playerTwoET.getText().toString();
             if (!playerOneName.isEmpty() && !playerTwoName.isEmpty()) {
+
+                gameViewModel.setPlayers(playerOneName, playerTwoName);
                 fragmentManager.beginTransaction().replace(R.id.nav_host_fragment_container, new GameFragment()).commit();
+
             } else {
                 Toast.makeText(getActivity(), "Name cannot be empty", Toast.LENGTH_LONG).show();
             }
         });
 
+    }
+
+    private void initViewModel() {
+        gameViewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
     }
 }
