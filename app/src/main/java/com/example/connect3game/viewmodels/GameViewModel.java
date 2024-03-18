@@ -1,5 +1,8 @@
 package com.example.connect3game.viewmodels;
 
+import androidx.databinding.ObservableArrayMap;
+import androidx.databinding.ObservableField;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.connect3game.models.GameBoard;
@@ -7,64 +10,43 @@ import com.example.connect3game.models.Player;
 
 public class GameViewModel extends ViewModel {
 
-    private Player playerOne;
-    private Player playerTwo;
-    private Player currentPlayer;
+    public ObservableField<String> currentPlayer = new ObservableField<>();
+    public ObservableArrayMap<String, Player> cells;
 
-    private int totalMoves = 0;
-
-    private GameBoard gameBoard = new GameBoard();
+    public GameBoard game;
+    public Player player1, player2;
+    public Boolean gameRunning;
 
     public void setPlayers(String playerOneName, String playerTwoName) {
-        this.playerOne = new Player(playerOneName, "X");
-        this.playerTwo = new Player(playerTwoName, "O");
+        player1 = new Player(playerOneName, "X");
+        player2 = new Player(playerTwoName, "O");
     }
 
-    public Player getCurrentPlayer() {
-        if (totalMoves <= 9) {
-            if (totalMoves % 2 == 1) {
-                currentPlayer = playerOne;
-            } else {
-                currentPlayer = playerTwo;
+    public void setGameBoard() {
+        game = new GameBoard(player1, player2);
+        cells = new ObservableArrayMap<>();
+        gameRunning = true;
+        currentPlayer.set(game.currentPlayer.name + "'s Turn");
+    }
+
+    public void onCellClick(String key) {
+        if (gameRunning) {
+            int row = Integer.parseInt(String.valueOf(key.charAt(0)));
+            int column = Integer.parseInt(String.valueOf(key.charAt(1)));
+            if (game.cells[row][column] == null) {
+                cells.put(key, game.currentPlayer);
+                game.addPlayerCell(row, column);
+                currentPlayer.set(game.currentPlayer.name + "'s Turn");
             }
         }
-        return currentPlayer;
     }
 
-    public void playMove(int row, int col) {
-        totalMoves++;
-        gameBoard.setMove(row, col, getCurrentPlayer().getPlayerSymbol());
+    public void clearCells() {
+        cells.clear();
     }
 
-    public boolean isGameOver() {
-        return (checkWinner(playerOne.getPlayerSymbol()) || checkWinner(playerTwo.getPlayerSymbol()) || isBoardFull());
-    }
-
-    private boolean isBoardFull() {
-        if (totalMoves == 9) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean checkWinner(String symbol) {
-        String[][] cells = gameBoard.getBoard();
-
-        for (int i = 0; i < 3; i++) {
-            if ((cells[i][0].equals(symbol) && cells[i][1].equals(symbol) && cells[i][2].equals(symbol)) || (cells[0][i].equals(symbol) && cells[1][i].equals(symbol) && cells[2][i].equals(symbol))) {
-                return true;
-            }
-        }
-
-        return (cells[0][0].equals(symbol) && cells[1][1].equals(symbol) && cells[2][2].equals(symbol)) || (cells[0][2].equals(symbol) && cells[1][1].equals(symbol) && cells[2][0].equals(symbol));
-    }
-
-    public void resetBoard() {
-        gameBoard.reset();
-        totalMoves = 0;
-        playerOne = null;
-        playerTwo = null;
-        currentPlayer = null;
+    public LiveData<Player> getWinner() {
+        return game.winner;
     }
 
 }

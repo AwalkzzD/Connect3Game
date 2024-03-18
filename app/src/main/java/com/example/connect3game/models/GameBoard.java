@@ -1,30 +1,83 @@
 package com.example.connect3game.models;
 
+import androidx.lifecycle.MutableLiveData;
+
 public class GameBoard {
-    private String[][] board;
 
-    public GameBoard() {
-        board = new String[3][3];
-        reset();
+    public static final int WIDTH_SIZE = 3;
+    public static final int HEIGHT_SIZE = 3;
+    public static final Player NO_ONE = new Player("No One", "-");
+
+    public Cell[][] cells;
+    public Player currentPlayer;
+    Player player1;
+    Player player2;
+    public MutableLiveData<Player> winner;
+    int remainder;
+
+    public GameBoard(Player player1, Player player2) {
+        init(player1, player2);
     }
 
-    public void reset() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; i++) {
-                board[i][j] = "";
-            }
+    private void init(Player player1, Player player2) {
+        cells = new Cell[WIDTH_SIZE][HEIGHT_SIZE];
+        this.player1 = player1;
+        this.player2 = player2;
+        currentPlayer = this.player1;
+        remainder = WIDTH_SIZE * HEIGHT_SIZE;
+        winner = new MutableLiveData<>();
+    }
+
+    public boolean winnerCheck(Cell... cells) {
+        if (cells[0] == null || cells[1] == null || cells[2] == null) return false;
+        return cells[0].player.value.compareTo(cells[1].player.value) == 0 && (cells[1].player.value.compareTo(cells[2].player.value) == 0);
+    }
+
+    public boolean verticalWinner() {
+        Cell[] checkCell = new Cell[WIDTH_SIZE];
+        for (int j = 0; j < HEIGHT_SIZE; j++) {
+            checkCell[0] = cells[0][j];
+            checkCell[1] = cells[1][j];
+            checkCell[2] = cells[2][j];
+            if (winnerCheck(checkCell)) return true;
         }
+        return false;
     }
 
-    public String[][] getBoard() {
-        return board;
+    public boolean horizontalWinner() {
+        for (Cell[] c : cells)
+            if (winnerCheck(c)) return true;
+        return false;
     }
 
-    public String getMove(int row, int col) {
-        return board[row][col];
+    public boolean diagonalWinner() {
+        Cell[] checkCell = new Cell[WIDTH_SIZE];
+        checkCell[0] = cells[0][0];
+        checkCell[1] = cells[1][1];
+        checkCell[2] = cells[2][2];
+        if (winnerCheck(checkCell)) return true;
+        checkCell[0] = cells[0][2];
+        checkCell[1] = cells[1][1];
+        checkCell[2] = cells[2][0];
+        return winnerCheck(checkCell);
     }
 
-    public void setMove(int row, int col, String symbol) {
-        board[row][col] = symbol;
+    public void addPlayerCell(int row, int column) {
+        cells[row][column] = new Cell(currentPlayer);
+        remainder -= 1;
+        if (verticalWinner()) {
+            winner.postValue(currentPlayer);
+            return;
+        } else if (horizontalWinner()) {
+            winner.postValue(currentPlayer);
+            return;
+        } else if (diagonalWinner()) {
+            winner.postValue(currentPlayer);
+            return;
+        } else if (remainder == 0) {
+            winner.postValue(NO_ONE);
+            return;
+        }
+        currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 }

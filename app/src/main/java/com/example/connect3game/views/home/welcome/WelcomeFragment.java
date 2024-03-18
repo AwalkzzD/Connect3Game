@@ -28,8 +28,7 @@ public class WelcomeFragment extends Fragment {
     private String playerTwoName;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_welcome, container, false);
     }
 
@@ -50,10 +49,8 @@ public class WelcomeFragment extends Fragment {
             playerOneName = playerOneET.getText().toString();
             playerTwoName = playerTwoET.getText().toString();
             if (!playerOneName.isEmpty() && !playerTwoName.isEmpty()) {
-
                 gameViewModel.setPlayers(playerOneName, playerTwoName);
                 fragmentManager.beginTransaction().replace(R.id.nav_host_fragment_container, new GameFragment()).commit();
-
             } else {
                 Toast.makeText(getActivity(), "Name cannot be empty", Toast.LENGTH_LONG).show();
             }

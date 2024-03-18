@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId = "com.example.connect3game"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
@@ -28,6 +28,10 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enable = true
     }
 }
 

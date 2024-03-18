@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:gravity="center"
-    android:orientation="vertical"
     tools:context=".views.home.welcome.WelcomeFragment">
 
     <TextView
+        android:id="@+id/welcome_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70dp"
         android:text="@string/welcome_text"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="25sp" />
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/player_one_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/welcome_message"
+        android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:hint="@string/player_one_name_hint"
         android:textAlignment="center"
@@ -31,6 +37,8 @@
         android:id="@+id/player_two_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/player_one_name"
+        android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:hint="@string/player_two_name_hint"
         android:textAlignment="center"
@@ -42,8 +50,10 @@
         android:id="@+id/play_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/player_two_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
         android:text="@string/play_button_text"
         android:textSize="20sp" />
 
-</LinearLayout>
+</RelativeLayout>

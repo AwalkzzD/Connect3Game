@@ -1,19 +1,27 @@
 package com.example.connect3game.models;
 
+import androidx.annotation.Nullable;
+
 public class Player {
-    private String playerName;
-    private String playerSymbol;
 
-    public Player(String name, String symbol) {
-        this.playerName = name;
-        this.playerSymbol = symbol;
+    public String name;
+    public String value;
+//    public Drawable value;
+
+    public Player(String name, String value) {
+        this.name = name;
+        this.value = value;
     }
 
-    public String getPlayerSymbol() {
-        return playerSymbol;
-    }
+    @Override
+    public boolean equals(@Nullable Object obj) {
 
-    public String getPlayerName() {
-        return playerName;
+        if (this == obj) return true;
+
+        Player player = (Player) obj;
+
+        return name.compareTo(player.name) == 0 && value.compareTo(player.value) == 0;
+//        return name.compareTo(player.name) == 0 && value.equals(player.value);
+
     }
 }
