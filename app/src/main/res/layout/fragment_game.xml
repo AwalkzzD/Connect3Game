@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.connect3game.viewmodels.GameViewModel" />
+            type="com.example.connect3game.ui.home.GameViewModel" />
 
     </data>
 
@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".views.home.game.GameFragment">
+        tools:context=".ui.home.game.GameFragment">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/custom_toolbar"

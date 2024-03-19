@@ -1,4 +1,4 @@
-package com.example.connect3game.models;
+package com.example.connect3game.data;
 
 public class Cell {
 

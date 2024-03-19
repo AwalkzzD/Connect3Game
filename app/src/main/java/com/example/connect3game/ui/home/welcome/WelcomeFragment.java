@@ -1,4 +1,4 @@
-package com.example.connect3game.views.home.welcome;
+package com.example.connect3game.ui.home.welcome;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,8 +15,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.connect3game.R;
-import com.example.connect3game.viewmodels.GameViewModel;
-import com.example.connect3game.views.home.game.GameFragment;
+import com.example.connect3game.ui.home.GameViewModel;
+import com.example.connect3game.ui.home.game.GameFragment;
 
 public class WelcomeFragment extends Fragment {
 
@@ -58,6 +58,9 @@ public class WelcomeFragment extends Fragment {
 
     }
 
+    /**
+     * viewModel initialization for setting players.
+     */
     private void initViewModel() {
         gameViewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
     }

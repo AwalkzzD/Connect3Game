@@ -1,4 +1,4 @@
-package com.example.connect3game.views.home.game;
+package com.example.connect3game.ui.home.game;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,15 +17,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.connect3game.R;
 import com.example.connect3game.databinding.FragmentGameBinding;
-import com.example.connect3game.models.GameBoard;
-import com.example.connect3game.models.Player;
-import com.example.connect3game.viewmodels.GameViewModel;
-import com.example.connect3game.views.home.welcome.WelcomeFragment;
+import com.example.connect3game.data.GameBoard;
+import com.example.connect3game.data.Player;
+import com.example.connect3game.ui.home.welcome.WelcomeFragment;
+import com.example.connect3game.ui.home.GameViewModel;
 
 public class GameFragment extends Fragment {
 
     private GameViewModel gameViewModel;
-
     private FragmentManager fragmentManager;
 
     @Override
@@ -33,14 +32,20 @@ public class GameFragment extends Fragment {
 
         FragmentGameBinding gameBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false);
         gameViewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
+
         initViewModel();
 
         gameBinding.setViewModel(gameViewModel);
 
-        Toolbar toolbar = gameBinding.customToolbar;
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        /**
+         * Toolbar setup
+         * */
+        {
+            Toolbar toolbar = gameBinding.customToolbar;
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
 
-        if (activity != null) activity.setSupportActionBar(toolbar);
+            if (activity != null) activity.setSupportActionBar(toolbar);
+        }
 
         return gameBinding.getRoot();
 
@@ -69,6 +74,10 @@ public class GameFragment extends Fragment {
         gameViewModel.getWinner().observe(getViewLifecycleOwner(), this::checkWinner);
     }
 
+
+    /**
+     * observer method for observing LiveData changes.
+     * */
     private void checkWinner(Player winner) {
         if (winner.equals(GameBoard.NO_ONE)) {
             gameViewModel.currentPlayer.set("It's a Draw!");

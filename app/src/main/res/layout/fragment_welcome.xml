@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:gravity="center"
-    tools:context=".views.home.welcome.WelcomeFragment">
+    tools:context=".ui.home.welcome.WelcomeFragment">
 
     <TextView
         android:id="@+id/welcome_message"
